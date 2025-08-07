@@ -129,7 +129,7 @@ export default function Welcome() {
                             <div className="animate-fade-in" style={{ animationDelay: '600ms', animationFillMode: 'both' }}>
                                 {/* <VideoPlayer /> */}
                                 <VideoPlayer
-                                    src="https://www.youtube.com/watch?v=HTMep-Lwde8&ab_channel=YuvenLie"
+                                    src="https://youtu.be/2lLbSAjeizA"
                                     title={'VSL - Belajar Editing Tingkat Tinggi'}
                                     className="aspect-video w-full lg:h-[600px]"
                                 />
