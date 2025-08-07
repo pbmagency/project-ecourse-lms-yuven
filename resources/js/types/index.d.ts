@@ -66,7 +66,7 @@ export interface Course {
     order?: number;
     status: string;
     module_count?: number;
-    completion_percentage?: number;
+    completion_percentage: number;
     created_at: string;
     updated_at: string;
     modules?: Module[];
@@ -84,4 +84,16 @@ export interface Module {
     updated_at: string;
     is_completed?: boolean;
     duration?: string;
+}
+
+export interface UserProgress {
+    id: number;
+    user_id: number;
+    course_id: number;
+    module_id?: number;
+    is_module_completed: boolean;
+    course_completion_percentage: number;
+    completed_at?: string;
+    created_at: string;
+    updated_at: string;
 }

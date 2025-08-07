@@ -77,7 +77,7 @@ function CourseCard({ course }: { course: Course }) {
                         className={cn('border-primary/30 bg-black/70 text-white', course.completion_percentage === 100 && 'text-primary')}
                     >
                         <Airplay className="mr-1 h-3 w-3" />
-                        {course.completion_percentage ?? 0}%
+                        {course.completion_percentage}%
                     </Badge>
                 </div>
             </div>
@@ -111,7 +111,7 @@ function CourseCard({ course }: { course: Course }) {
                 <div className="space-y-2">
                     <div className="text-muted-foreground flex justify-between text-xs">
                         <span>Progress</span>
-                        <span>{course.completion_percentage ?? 0}%</span>
+                        <span>{course.completion_percentage}%</span>
                     </div>
                     <div className="bg-secondary h-2 overflow-hidden rounded-full">
                         <div
@@ -120,7 +120,7 @@ function CourseCard({ course }: { course: Course }) {
                                 progressColor,
                                 // course.completion_percentage > 0 && 'animate-pulse',
                             )}
-                            style={{ width: `${course.completion_percentage ?? 1}%` }}
+                            style={{ width: `${course.completion_percentage}%` }}
                         >
                             {course.completion_percentage > 0 && (
                                 <div className="animate-data-flow absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent" />

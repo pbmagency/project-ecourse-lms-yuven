@@ -57,7 +57,7 @@ function ModuleCard({ module, index }: { module: CoursePageProps['course']['modu
                 <div className="flex-shrink-0">
                     <button
                         className="bg-primary/10 border-primary/30 text-primary hover:bg-primary group-hover:animate-glow-pulse flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border transition-all duration-300 hover:scale-110 hover:text-black"
-                        onClick={visitModule(module.slug)}
+                        onClick={visitModule(module.slug!)}
                     >
                         <Play className="ml-0.5 h-4 w-4" fill="currentColor" />
                     </button>
@@ -108,10 +108,10 @@ export default function Course({ course }: CoursePageProps) {
                     <div className="relative mx-auto max-w-6xl px-4 pt-8 pb-12 md:pt-16 md:pb-20">
                         <div className="mb-6 lg:hidden">
                             <Link href="/">
-                                <Button variant="ghost" className="p-0 text-neutral-400 hover:text-white">
-                                    <ArrowLeft className="mr-2 h-4 w-4" />
-                                    Back to Courses
-                                </Button>
+                        <Button variant="ghost" className="p-0 text-neutral-400 hover:text-white">
+                            <ArrowLeft className="mr-2 h-4 w-4" />
+                            Back to Courses
+                        </Button>
                             </Link>
                         </div>
 
