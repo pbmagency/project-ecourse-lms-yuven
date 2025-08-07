@@ -38,7 +38,7 @@ class RegisteredUserController extends Controller
 
         // 2. Konfigurasi Midtrans
         Config::$serverKey = env('MIDTRANS_SERVER_KEY');
-        Config::$isProduction = false;
+        Config::$isProduction = true;
         Config::$isSanitized = true;
         Config::$is3ds = true;
 
