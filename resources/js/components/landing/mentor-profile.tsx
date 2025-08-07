@@ -51,7 +51,7 @@ const credentials: Credential[] = [
 const achievements: Achievement[] = [
     {
         id: '1',
-        image: '/storage/landing/thumbnailResult/vsl.jpg',
+        image: '/storage/landing/thumbnailResult/vsl.webp',
         title: 'Hollywood Project',
         description: 'Color grading for indie film',
     },

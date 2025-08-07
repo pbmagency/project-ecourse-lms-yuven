@@ -93,6 +93,14 @@ function FaqItem({ faq, index }: FaqItemProps) {
 }
 
 export function FaqSection() {
+    const handleCtaClick = () => {
+        // scroll to pricing section
+        const pricingSection = document.getElementById('pricing-section');
+        if (pricingSection) {
+            pricingSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
         <section className="border-border/50 relative border-t py-20 lg:py-32">
             {/* Background Effects */}
@@ -137,7 +145,10 @@ export function FaqSection() {
                                         <p className="text-muted-foreground text-sm">Tim support kami siap membantu</p>
                                     </div>
                                 </div> */}
-                                <button className="bg-primary/10 hover:bg-primary/20 text-primary border-primary/30 hover:border-primary/50 w-full rounded-xl border px-4 py-3 font-medium transition-all duration-300">
+                                <button
+                                    onClick={handleCtaClick}
+                                    className="bg-primary/10 hover:bg-primary/20 text-primary border-primary/30 hover:border-primary/50 w-full rounded-xl border px-4 py-3 font-medium transition-all duration-300"
+                                >
                                     Join Sekarang
                                 </button>
                             </div>

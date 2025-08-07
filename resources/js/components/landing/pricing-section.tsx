@@ -152,14 +152,15 @@ export function PricingSection() {
                                             <span className="bg-destructive/20 text-destructive rounded-md px-2 py-1 text-sm font-medium">-83%</span>
                                         </div>
                                         <div className="flex items-center justify-center gap-2">
-                                            <span className="text-2xl text-green-500 line-through">Rp 499.000</span>
+                                            <span className="text-primary/80 text-2xl line-through">Rp 499.000</span>
                                             <span className="bg-primary/80 text-accent rounded-md px-2 py-1 text-xs font-semibold">
                                                 50 Orang Pertama
                                             </span>
                                         </div>
                                         <div className="flex items-baseline justify-center gap-1">
                                             <span className="text-primary text-2xl font-medium">Rp</span>
-                                            <span className="text-foreground text-6xl font-bold tracking-tight lg:text-7xl">294.000</span>
+                                            {/* harusnya text-foreground */}
+                                            <span className="text-6xl font-bold tracking-tight text-green-400 lg:text-7xl">294.000</span>
                                         </div>
                                         <p className="text-muted-foreground text-lg">Akses selamanya • Tanpa biaya bulanan</p>
                                     </div>
@@ -189,13 +190,13 @@ export function PricingSection() {
                                     </CtaButton>
 
                                     <div className="text-muted-foreground flex items-center justify-center gap-6 text-sm">
+                                        {/* <div className="flex items-center gap-2">
+                                            <Check className="text-primary h-4 w-4" />
+                                            
+                                        </div> */}
                                         <div className="flex items-center gap-2">
                                             <Check className="text-primary h-4 w-4" />
-                                            30-day money back
-                                        </div>
-                                        <div className="flex items-center gap-2">
-                                            <Check className="text-primary h-4 w-4" />
-                                            Instant access
+                                            Akses Dimana & Kapan Saja
                                         </div>
                                     </div>
                                 </div>

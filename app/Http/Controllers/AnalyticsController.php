@@ -83,7 +83,7 @@ class AnalyticsController extends Controller
             ->where('event_data->status', 'success')
             ->count();
 
-        $revenue = $payments * 499000; // Rp 499,000 per registration
+        $revenue = $payments * env("COURSE_PRICE"); // Rp 499,000 per registration
 
         return [
             'total_visits' => $totalVisits,
@@ -105,7 +105,7 @@ class AnalyticsController extends Controller
             'event_type'
         )
             ->where('created_at', '>=', $startDate)
-            ->whereIn('event_type', ['visit', 'conversion', 'payment'])
+            ->whereIn('event_type', ['visit', 'engagement', 'conversion', 'payment'])
             ->groupBy(['date', 'event_type'])
             ->orderBy('date')
             ->get()

@@ -199,12 +199,12 @@ export function VideoPlayer({ src, title, onProgress, onComplete, className }: V
 
     const isYouTube = isYouTubeUrl(src);
     const videoId = isYouTube ? getYouTubeId(src) : null;
-    const thumbnail = videoId ? `/storage/landing/vsl.jpg` : null;
+    const thumbnail = videoId ? `/storage/landing/vsl.webp` : null;
 
     return (
         <div
             ref={containerRef}
-            className={cn('group relative overflow-hidden rounded-2xl bg-black shadow-2xl', 'border border-neutral-800/50', className)}
+            className={cn('group relative overflow-hidden rounded-2xl bg-black shadow-2xl', 'border border-neutral-800/60', className)}
         >
             {/* YouTube Player */}
             {isYouTube && !isLoaded && (
@@ -232,7 +232,6 @@ export function VideoPlayer({ src, title, onProgress, onComplete, className }: V
 
             {!isYouTube && (
                 <>
-                    // Local Video
                     <video
                         ref={videoRef}
                         src={src}
@@ -249,7 +248,7 @@ export function VideoPlayer({ src, title, onProgress, onComplete, className }: V
                         </div>
                     )}
                     {/* Play/Pause Overlay */}
-                    <div
+                    {/* <div
                         className={cn(
                             'absolute inset-0 flex items-center justify-center bg-black/20 transition-opacity duration-300',
                             showControls ? 'opacity-0' : 'opacity-100',
@@ -265,7 +264,7 @@ export function VideoPlayer({ src, title, onProgress, onComplete, className }: V
                                 <Play className="ml-1 h-8 w-8" fill="currentColor" />
                             )}
                         </button>
-                    </div>
+                    </div> */}
                     {/* Controls Overlay */}
                     <div
                         className={cn(

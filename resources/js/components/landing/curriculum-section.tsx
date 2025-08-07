@@ -1,8 +1,7 @@
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { CtaButton } from '@/components/ui/cta-button';
-import { useAnalytics } from '@/hooks/use-analytics';
 import { cn } from '@/lib/utils';
-import { ChevronDown, ChevronRight, CirclePlay, Clock, Play } from 'lucide-react';
+import { ChevronDown, ChevronRight, CirclePlay } from 'lucide-react';
 import { useState } from 'react';
 
 interface CurriculumModule {
@@ -28,7 +27,7 @@ const curriculumModules: CurriculumModule[] = [
         description:
             'Di materi ini lu akan belajar cara berpikir editor kelas dunia, apa yang mereka pikirkan saat editing, gimana cara mereka menata scene, dll. materi ini juga akan membantu lu memiliki mindset belajar yang tepat, sehingga perkembangan lu akan lebih cepat sebagai editor',
         thumbnail: '/storage/landing/mindseteditor.jpg',
-        topics: ['Interface Overview', 'Project Setup', 'Media Import', 'Timeline Basics', 'Keyboard Shortcuts'],
+        topics: ['Kualitas vs kuantitas', 'Convergent and divergent thinking', 'Create not learn to create', 'Mindset Action'],
         difficulty: 'Beginner',
         students: 15420,
     },
@@ -41,7 +40,7 @@ const curriculumModules: CurriculumModule[] = [
         description:
             'Di materi ini kita akan siapin lu semua hal yang lu perlu disiapin sebelum mulai editing. seperti cara mendownload softwarenya, caranya melakukan foldering, hal yang harus dihindari saat editing. gimana lengkap banget kan? bahkan cara downloadnya aja ditemenin, jadi lu gausah khawatir kesasar saat belajar',
         thumbnail: '/storage/landing/settingup.jpg',
-        topics: ['Multicam Sync', 'Advanced Trimming', 'J & L Cuts', 'Match Frame', 'Audio Sync'],
+        topics: ['Apa Itu Davinci Resolve', 'Mendownload davinci', 'Foldering', 'Menghindari media offline', 'Start editing'],
         difficulty: 'Intermediate',
         students: 12850,
     },
@@ -54,7 +53,18 @@ const curriculumModules: CurriculumModule[] = [
         description:
             'Setelah itu, akhirnya kita akan belajar software yang kita nantikan yaitu davinci resolve. disini lu akan belajar dasar dasarnya agar lu bisa memahami software ini',
         thumbnail: '/storage/landing/davincibasic.jpg',
-        topics: ['Primary Correction', 'Secondary Grading', 'LUT Application', 'Skin Tone Correction', 'Creative Looks'],
+        topics: [
+            'Introduction to davinci resolve',
+            'Introduction to editing page',
+            'Project management',
+            'Clipping',
+            'Fast clipping',
+            'Overlay',
+            'Green screen',
+            'Keyframing',
+            'Color grading',
+            'Rendering',
+        ],
         difficulty: 'Advanced',
         students: 9640,
     },
@@ -67,7 +77,7 @@ const curriculumModules: CurriculumModule[] = [
         description:
             'Ga cuman editing doang, lu juga bakal diajarin caranya mengatur audio dalam video lu. disini bakal diajarin caranya merekam suara, mengatur suara, dan lagu serta sound effect yang tentunya lolos copyright. lu juga bakal dapet ratusan aset dan sfx gratis yang siap pakai. jadi lu juga gausah ribet ribet kumpulin sendiri',
         thumbnail: '/storage/landing/audio.jpg',
-        topics: ['Fusion Basics', 'Text Animation', 'Shape Animation', 'Particle Systems', 'Compositing'],
+        topics: ['Mendownload Audacity', 'Merekam suara', 'Audio control', 'Sound Effect & Non Copyright Songs'],
         difficulty: 'Advanced',
         students: 8320,
     },
@@ -79,8 +89,19 @@ const curriculumModules: CurriculumModule[] = [
         duration: '3.1 jam',
         description:
             'Setelah lu udah mulai familiar dengan davinci resolve, dan editing secara keseluruhan. kita akhirnya akan belajar fitur fitur advancenya untuk membuat editing yang lebih bagus. tapi disini tuh bukan cuman kasi tau lu fitur advancenya aja, tapi juga berfokus untuk membuat gaya editing yang paling diminatin di jaman ini yaitu VFX Editing',
-        thumbnail: '/storage/landing/davinciadvance.jpg',
-        topics: ['Audio Mixing', 'Sound Design', 'Noise Reduction', 'EQ & Compression', 'Surround Sound'],
+        thumbnail: '/storage/landing/davinciadvance.webp',
+        topics: [
+            'Apa itu davinci advance',
+            'Visual Effects',
+            'Proses pembuatan visual effect',
+            'Smooth Editing',
+            'Davinci Backgrounds',
+            'Smooth Keyframing',
+            'Compound Clip',
+            'Motion graphics',
+            'Reusing Assets',
+            'Plugins',
+        ],
         difficulty: 'Intermediate',
         students: 7890,
     },
@@ -92,8 +113,8 @@ const curriculumModules: CurriculumModule[] = [
         duration: '1.8 jam',
         description:
             'Dan tentunya,  setelah mempelajari semua section dibelakang soal editing, kita akan belajar persisnya cara mengedit video youtube. editor amplifier ini dikembangkan khusus untuk youtuber. jadi tentunya ini akan jadi section paling daging untuk kalian para youtuber',
-        thumbnail: '/storage/landing/youtubeediting.jpg',
-        topics: ['Render Settings', 'Platform Optimization', 'Batch Export', 'Quality Control', 'Archive Workflow'],
+        thumbnail: '/storage/landing/youtubeediting.webp',
+        topics: ['Apa itu youtube editing', 'Steal like an artist', '4 Scene rule', 'Background Branding', 'Hook Editing', 'Editing workflow'],
         difficulty: 'Beginner',
         students: 11250,
     },
@@ -105,8 +126,8 @@ const curriculumModules: CurriculumModule[] = [
         duration: '1.8 jam',
         description:
             'Hore! lu udah belajar semua soal editing mulai dari basic dan advance, sekarang lu udah siap buat mulai ngedit secara langsung, tapi tunggu gimana persisnya mengedit video secara beneran? well tenang, section dikembangkan khusus untuk membimbing kalian saat mengedit video secara langsung agar tidak kesasar arah.',
-        thumbnail: '/storage/landing/editingprinciples.jpg',
-        topics: ['Render Settings', 'Platform Optimization', 'Batch Export', 'Quality Control', 'Archive Workflow'],
+        thumbnail: '/storage/landing/editingprinciples.webp',
+        topics: ['Apa itu editing principles', 'Apa itu editing?', 'Kesalahan saat editing', 'Leading the viewers eye', 'Editing Process'],
         difficulty: 'Beginner',
         students: 11250,
     },
@@ -184,7 +205,7 @@ function CurriculumCard({ module, delay }: CurriculumCardProps) {
                         </div> */}
 
                         {/* Stats Overlay */}
-                        <div className="absolute right-3 bottom-3 left-3 flex justify-between">
+                        {/* <div className="absolute right-3 bottom-3 left-3 flex justify-between">
                             <div className="flex items-center gap-1 rounded-full bg-black/60 px-2 py-1 backdrop-blur-sm">
                                 <Play className="h-3 w-3 text-white/80" />
                                 <span className="text-xs text-white/80">{module.videoCount} videos</span>
@@ -193,7 +214,7 @@ function CurriculumCard({ module, delay }: CurriculumCardProps) {
                                 <Clock className="h-3 w-3 text-white/80" />
                                 <span className="text-xs text-white/80">{module.duration}</span>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 
@@ -276,14 +297,7 @@ function CurriculumCard({ module, delay }: CurriculumCardProps) {
 }
 
 export function CurriculumSection() {
-    const { trackVisit, trackEngagement } = useAnalytics();
-
     const handleCtaClick = () => {
-        trackEngagement('cta_click', {
-            button_text: 'Gabung sekarang',
-            location: 'curriculum_section',
-        });
-
         // scroll to pricing section
         const pricingSection = document.getElementById('pricing-section');
         if (pricingSection) {

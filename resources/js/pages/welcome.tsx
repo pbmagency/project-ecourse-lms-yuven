@@ -14,11 +14,12 @@ import { useDwellTime } from '@/hooks/use-dwell-time';
 import { useScrollTracking } from '@/hooks/use-scroll-tracking';
 import { type SharedData } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Welcome() {
     const { auth } = usePage<SharedData>().props;
     const { trackVisit, trackEngagement } = useAnalytics();
+    const [isHovered, setIsHovered] = useState(false);
 
     // Initialize tracking hooks
     useScrollTracking();
@@ -31,11 +32,6 @@ export default function Welcome() {
 
     // Track CTA button click
     const handleCtaClick = () => {
-        trackEngagement('cta_click', {
-            button_text: 'Gabung sekarang',
-            location: 'hero_section',
-        });
-
         // scroll to pricing section
         const pricingSection = document.getElementById('pricing-section');
         if (pricingSection) {
@@ -89,11 +85,40 @@ export default function Welcome() {
                 </header>
 
                 {/* Headline Section */}
-                <section className="relative overflow-hidden pt-20 lg:pt-12">
+                <section
+                    className="relative overflow-hidden pt-20 lg:pt-12"
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
+                >
                     <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div className="space-y-8 text-center">
                             <div className="animate-fade-in">
                                 <HeroBadge text="Premium Video Editing Course" />
+                            </div>
+
+                            {/* Glow effect */}
+                            <div className="absolute inset-0 overflow-visible">
+                                <div
+                                    className={`animate-float absolute h-96 w-96 rounded-full blur-3xl transition-all duration-1000 ${
+                                        isHovered ? 'bg-primary/30' : 'bg-primary/15'
+                                    }`}
+                                    style={{
+                                        top: '-20%',
+                                        left: '35%',
+                                        animationDelay: '1s',
+                                    }}
+                                />
+                                <div
+                                    className={`animate-float absolute h-80 w-80 rounded-full blur-3xl transition-all duration-1000 ${
+                                        isHovered ? 'bg-accent/30' : 'bg-accent/15'
+                                    }`}
+                                    style={{
+                                        top: '-20%',
+                                        right: '35%',
+                                        animationDelay: '1s',
+                                        animationDirection: 'reverse',
+                                    }}
+                                />
                             </div>
 
                             <div className="animate-fade-in space-y-6" style={{ animationDelay: '200ms', animationFillMode: 'both' }}>
@@ -106,8 +131,8 @@ export default function Welcome() {
                                         Youtube Sebanyak 71%
                                     </span>
                                 </h1>
-
-                                <p className="text-muted-foreground mx-auto max-w-2xl text-base leading-relaxed md:text-xl">
+                                {/* harusnya text-muted-foreground */}
+                                <p className="mx-auto max-w-2xl text-base leading-relaxed text-green-400 md:text-xl">
                                     Harga Early Access Berlaku Tanggal 9 Agustus 2025 - 16 Agustus 2025 Khusus Untuk 50 Orang Pertama
                                 </p>
                             </div>

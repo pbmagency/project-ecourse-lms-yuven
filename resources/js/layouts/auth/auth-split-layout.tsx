@@ -14,7 +14,12 @@ export default function AuthSplitLayout({ children, title, description }: PropsW
     return (
         <div className="relative grid h-dvh flex-col items-center justify-center px-8 sm:px-0 lg:max-w-none lg:grid-cols-2 lg:px-0">
             <div className="bg-muted relative hidden h-full flex-col p-10 text-white lg:flex dark:border-r">
-                <div className="absolute inset-0 bg-zinc-900" />
+                <div className="absolute inset-0 bg-zinc-900">
+                    {/* overlay shadow */}
+                    <div className="absolute inset-0 bg-black/10" />
+
+                    <img src="/storage/auth/login-bg.webp" alt="" className="h-full w-full object-cover" />
+                </div>
                 <Link href={route('home')} className="relative z-20 flex items-center justify-center text-lg font-medium">
                     <AppLogo />
                     {/* {name} */}

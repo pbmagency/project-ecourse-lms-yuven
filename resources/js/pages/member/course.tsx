@@ -76,7 +76,7 @@ export default function Course({ course }: CoursePageProps) {
 
     // Group modules into sections (for demo purposes, grouping every 3-4 modules)
     const moduleSections = course.modules.reduce((sections: any[], module, index) => {
-        const sectionIndex = Math.floor(index / 4);
+        const sectionIndex = Math.floor(index / 50);
         if (!sections[sectionIndex]) {
             sections[sectionIndex] = {
                 title: `Modules`,
@@ -90,7 +90,7 @@ export default function Course({ course }: CoursePageProps) {
     // const mobileSidebarContent = <CourseMobileSidebar course={course} />;
 
     return (
-        <AppHeaderLayout breadcrumbs={[{ title: 'Courses', href: '/' }, { title: course.name }]}>
+        <AppHeaderLayout breadcrumbs={[{ title: 'Courses', href: route('member.index') }, { title: course.name }]}>
             <Head title={course.name} />
 
             <div className="min-h-screen bg-black">

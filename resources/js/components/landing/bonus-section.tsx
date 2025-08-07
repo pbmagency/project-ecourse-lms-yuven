@@ -1,6 +1,5 @@
 import { IndividualBonusSection } from '@/components/landing/individual-bonus-section';
 import { CtaButton } from '@/components/ui/cta-button';
-import { useAnalytics } from '@/hooks/use-analytics';
 import { Clock, Play, Sparkles, Tag, Youtube } from 'lucide-react';
 import { useState } from 'react';
 
@@ -115,14 +114,7 @@ export function BonusSection() {
     const [activePreview, setActivePreview] = useState(1);
     const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
-    const { trackVisit, trackEngagement } = useAnalytics();
-
     const handleCtaClick = () => {
-        trackEngagement('cta_click', {
-            button_text: 'Gabung sekarang',
-            location: 'bonus_premium_section',
-        });
-
         // scroll to pricing section
         const pricingSection = document.getElementById('pricing-section');
         if (pricingSection) {
@@ -131,11 +123,6 @@ export function BonusSection() {
     };
 
     const handleCtaClick2 = () => {
-        trackEngagement('cta_click', {
-            button_text: 'Ambil bonus sekarang',
-            location: 'total_value_box',
-        });
-
         // scroll to pricing section
         const pricingSection = document.getElementById('pricing-section');
         if (pricingSection) {

@@ -49,7 +49,7 @@ export default function Register() {
         e.preventDefault();
 
         // Track form submission attempt
-        trackConversion('registration_attempt');
+        trackConversion('registration');
 
         try {
             // 1. Minta Snap Token + validasi form
@@ -57,7 +57,7 @@ export default function Register() {
 
             if (res.data.snapToken) {
                 // Track payment flow initiation
-                trackEngagement('payment_flow_started');
+                // trackEngagement('payment_flow_started');
 
                 window.snap.pay(res.data.snapToken, {
                     onSuccess: async function () {
@@ -68,10 +68,9 @@ export default function Register() {
                         // Track successful payment
                         trackPayment('success', {
                             payment_method: 'midtrans',
-                            amount: 499000,
+                            amount: 294000,
                         });
 
-                        trackConversion('registration_complete');
                         // 2. Kalau bayar berhasil, buat akun
                         post(route('register'), {
                             onFinish: () => reset('password', 'password_confirmation'),
@@ -95,9 +94,9 @@ export default function Register() {
             }
         } catch (err: any) {
             // Track form validation errors
-            trackEngagement('form_validation_error', {
-                errors: err.response?.data?.errors ? Object.keys(err.response.data.errors) : [],
-            });
+            // trackEngagement('form_validation_error', {
+            //     errors: err.response?.data?.errors ? Object.keys(err.response.data.errors) : [],
+            // });
 
             if (err.response && err.response.data && err.response.data.errors) {
                 const validationErrors = err.response.data.errors;
@@ -113,11 +112,11 @@ export default function Register() {
     };
 
     const handleFieldFocus = (fieldName: string) => {
-        trackEngagement('form_field_focus', { field: fieldName });
+        // trackEngagement('form_field_focus', { field: fieldName });
     };
 
     const handleFieldBlur = (fieldName: string) => {
-        trackEngagement('form_field_blur', { field: fieldName });
+        // trackEngagement('form_field_blur', { field: fieldName });
     };
 
     return (
@@ -247,7 +246,7 @@ export default function Register() {
                         </div>
                     </div>
                     <div className="grid gap-4">
-                        <Input type="text" tabIndex={5} value="Special Price Rp 499.000" disabled className="border-primary/80" />
+                        <Input type="text" tabIndex={5} value="Special Price Rp 294.000" disabled className="border-primary/80" />
                     </div>
 
                     <Button type="submit" className="mt-2 w-full" tabIndex={6} disabled={processing}>

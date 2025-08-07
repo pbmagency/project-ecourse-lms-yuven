@@ -218,7 +218,7 @@ export default function Module({ module, prevModule, nextModule }: ModulePagePro
     return (
         <AppHeaderLayout
             breadcrumbs={[
-                { title: 'Courses', href: '/' },
+                { title: 'Courses', href: route('member.index') },
                 { title: module.course.name, href: route('member.course', { course: module.course.slug }) },
                 { title: module.name },
             ]}

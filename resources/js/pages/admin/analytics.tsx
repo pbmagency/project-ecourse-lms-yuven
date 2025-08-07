@@ -130,7 +130,7 @@ export default function Analytics({ stats, chartData, referralData, conversionFu
                             title="Total Revenue"
                             value={formatCurrency(stats.total_revenue)}
                             icon={DollarSign}
-                            description={`Rp 499.000 × ${stats.payments} payments`}
+                            description={`Rp 294.000 × ${stats.payments} payments`}
                             className="lg:w-1/2"
                         />
                     </div>

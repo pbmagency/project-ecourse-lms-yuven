@@ -37,7 +37,7 @@ const videoResults: VideoResult[] = [
         id: '3',
         title: '7 Hal Yang Gw Harap Gw Tau Sebelum Jadi Youtuber Gaming',
         thumbnail: '/storage/landing/thumbnailResult/7hal.jpg',
-        url: 'https://www.youtube.com/watch?v=TIy3GzYhVos',
+        url: 'https://www.youtube.com/watch?v=9SjnozcsnJU',
         views: '1.5M',
         duration: '18:22',
         description:
@@ -66,7 +66,7 @@ const videoResults: VideoResult[] = [
     {
         id: '6',
         title: 'Cara Memulai Channel Youtube Di 2025 (Full Course)',
-        thumbnail: '/storage/landing/thumbnailResult/vsl.jpg',
+        thumbnail: '/storage/landing/thumbnailResult/vsl.webp',
         url: 'https://www.youtube.com/watch?v=HTMep-Lwde8',
         views: '980K',
         duration: '52:08',
