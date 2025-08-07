@@ -13,7 +13,7 @@ class MemberController extends Controller
     public function index()
     {
         $userId = auth()->id();
-        
+
         $courses = Course::select([
             'id',
             'name',
@@ -36,7 +36,7 @@ class MemberController extends Controller
                 $userProgress = UserProgress::where('user_id', $userId)
                     ->where('course_id', $course->id)
                     ->first();
-                
+
                 $course->completion_percentage = $userProgress ? $userProgress->course_completion_percentage : 0;
 
                 // Add placeholder thumbnails for courses without images
@@ -61,7 +61,7 @@ class MemberController extends Controller
     public function course(Course $course)
     {
         $userId = auth()->id();
-        
+
         // Load course with modules
         $course->load(['modules' => function ($query) {
             $query->where('status', 'published')
@@ -85,7 +85,7 @@ class MemberController extends Controller
             // Get user's progress for this module
             $userProgress = UserProgress::getUserModuleProgress($userId, $module->id);
             $module->is_completed = $userProgress ? $userProgress->is_module_completed : false;
-            
+
             // Format duration
             $module->duration = $this->formatDuration($module->duration);
             return $module;
@@ -95,7 +95,7 @@ class MemberController extends Controller
         $userProgress = UserProgress::where('user_id', $userId)
             ->where('course_id', $course->id)
             ->first();
-        
+
         $course->completion_percentage = $userProgress ? $userProgress->course_completion_percentage : 0;
 
         return Inertia::render('member/course', [
@@ -106,7 +106,7 @@ class MemberController extends Controller
     public function module(Module $module)
     {
         $userId = auth()->id();
-        
+
         // Load the module with its course and all course modules
         $module->load([
             'course' => function ($query) {
@@ -142,7 +142,7 @@ class MemberController extends Controller
         $courseProgress = UserProgress::where('user_id', $userId)
             ->where('course_id', $module->course->id)
             ->first();
-        
+
         $module->course->completion_percentage = $courseProgress ? $courseProgress->course_completion_percentage : 0;
 
         // Find current module index and determine navigation
@@ -164,7 +164,7 @@ class MemberController extends Controller
         try {
             $userId = auth()->id();
             $courseId = $module->course_id;
-            
+
             // Create or update user progress for this module
             UserProgress::updateOrCreate(
                 [

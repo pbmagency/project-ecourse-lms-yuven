@@ -97,9 +97,9 @@ function CourseCard({ course }: { course: Course }) {
                         <div className="flex items-center gap-1">
                             <div className={cn('h-2 w-2 rounded-full', progressColor)} />
                             <span>
-                                {course.completion_percentage === 100
-                                    ? 'Complete'
-                                    : course.completion_percentage === 0
+                                {course.completion_percentage == 100
+                                    ? 'Completed'
+                                    : course.completion_percentage == 0
                                       ? 'Not Started'
                                       : 'In Progress'}
                             </span>
