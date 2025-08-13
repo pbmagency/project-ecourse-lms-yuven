@@ -37,10 +37,13 @@ export default function Register() {
     useEffect(() => {
         // Dynamically load Midtrans script
         const script = document.createElement('script');
-        script.src = 'https://app.midtrans.com/snap/snap.js';
-        script.setAttribute('data-client-key', import.meta.env.VITE_MIDTRANS_CLIENT_KEY);
-        script.type = 'text/javascript';
-        script.async = true;
+        // script.src = 'https://app.midtrans.com/snap/snap.js';
+        // script.setAttribute('data-client-key', import.meta.env.VITE_MIDTRANS_CLIENT_KEY);
+        // script.type = 'text/javascript';
+        // script.async = true;
+
+        // Duitku
+        script.src = 'https://app-sandbox.duitku.com/lib/js/duitku.js';
 
         document.body.appendChild(script);
     }, []);
@@ -52,22 +55,23 @@ export default function Register() {
         trackConversion('registration');
 
         try {
+            // Duitku
             // 1. Minta Snap Token + validasi form
-            const res = await axios.post(route('register.get-snap-token'), data);
+            const res = await axios.post(route('register.get-reference'), data);
+            const reference = res.data.reference;
 
-            if (res.data.snapToken) {
-                // Track payment flow initiation
-                // trackEngagement('payment_flow_started');
-
-                window.snap.pay(res.data.snapToken, {
-                    onSuccess: async function () {
+            if (reference) {
+                checkout.process(reference, {
+                    defaultLanguage: 'id', //opsional pengaturan bahasa
+                    currency: 'IDR', //optional to set rate estimation
+                    successEvent: function (result: any) {
                         setToastMessage('Payment success, account is being created.');
                         setShowToast(true);
                         setTimeout(() => setShowToast(false), 2000);
 
                         // Track successful payment
                         trackPayment('success', {
-                            payment_method: 'midtrans',
+                            payment_method: 'duitku',
                             amount: 294000,
                         });
 
@@ -76,22 +80,68 @@ export default function Register() {
                             onFinish: () => reset('password', 'password_confirmation'),
                         });
                     },
-                    onPending: function (result) {
-                        setToastMessage('Payment pending');
+                    pendingEvent: function (result: any) {
+                        setToastMessage('Payment closed, please try again.');
                         setShowToast(true);
                         setTimeout(() => setShowToast(false), 4000);
 
                         trackPayment('pending');
                     },
-                    onError: function (error) {
+                    errorEvent: function (error: any) {
                         setToastMessage('Payment failed, please try again.');
                         setShowToast(true);
                         setTimeout(() => setShowToast(false), 4000);
 
                         trackPayment('failed', { error: error.message });
                     },
+                    closeEvent: function (result: any) {
+                        setToastMessage('Payment canceled');
+                        setShowToast(true);
+                        setTimeout(() => setShowToast(false), 4000);
+
+                        trackPayment('closed');
+                    },
                 });
             }
+
+            // Midtrans
+            // 1. Minta Snap Token + validasi form
+            // const res = await axios.post(route('register.get-snap-token'), data);
+
+            // if (res.data.snapToken) {
+            //     window.snap.pay(res.data.snapToken, {
+            //         onSuccess: async function () {
+            //             setToastMessage('Payment success, account is being created.');
+            //             setShowToast(true);
+            //             setTimeout(() => setShowToast(false), 2000);
+
+            //             // Track successful payment
+            //             trackPayment('success', {
+            //                 payment_method: 'midtrans',
+            //                 amount: 294000,
+            //             });
+
+            //             // 2. Kalau bayar berhasil, buat akun
+            //             post(route('register'), {
+            //                 onFinish: () => reset('password', 'password_confirmation'),
+            //             });
+            //         },
+            //         onPending: function (result) {
+            //             setToastMessage('Payment pending');
+            //             setShowToast(true);
+            //             setTimeout(() => setShowToast(false), 4000);
+
+            //             trackPayment('pending');
+            //         },
+            //         onError: function (error) {
+            //             setToastMessage('Payment failed, please try again.');
+            //             setShowToast(true);
+            //             setTimeout(() => setShowToast(false), 4000);
+
+            //             trackPayment('failed', { error: error.message });
+            //         },
+            //     });
+            // }
         } catch (err: any) {
             // Track form validation errors
             // trackEngagement('form_validation_error', {

@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Auth\Events\Registered;
+use App\Http\Controllers\DuitkuController;
 
 class RegisteredUserController extends Controller
 {
@@ -36,6 +37,7 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        // midtrans
         // 2. Konfigurasi Midtrans
         Config::$serverKey = env('MIDTRANS_SERVER_KEY');
         Config::$isProduction = true;
@@ -61,6 +63,39 @@ class RegisteredUserController extends Controller
             'snapToken' => $snapToken,
             'formData' => $validated,
         ]);
+    }
+
+    public function getReferenceDuitku(Request $request)
+    {
+        // 1. Validasi data form
+        $validated = $request->validate([
+            'username' => 'required|string|max:255|alpha_dash|unique:users',
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:255|min_digits:8',
+            'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        // duitku pop
+        $duitku = new DuitkuController();
+
+        $order_id = 'REG-' . time();
+        $response = $duitku->create($order_id, env('COURSE_PRICE'), 'justinereifanwijaya@gmail.com', route('member.index'));
+
+        $data = json_decode($response);
+
+        if ($data && $data->reference) {
+            return response()->json([
+                'reference' => $data->reference,
+                'formData' => $validated,
+            ]);
+        } else {
+            logger()->error("Failed to create Duitku payment: " . $response);
+            return response()->json([
+                'status' => 'error',
+                'message' => "Gagal membuat pembayaran, silahkan hubungi admin",
+            ]);
+        }
     }
 
     /**

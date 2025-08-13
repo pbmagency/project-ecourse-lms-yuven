@@ -16,6 +16,7 @@ Route::get('/', function () {
 
 
 Route::post('/register/get-snap-token', [RegisteredUserController::class, 'getSnapToken'])->name('register.get-snap-token');
+Route::post('/register/get-reference', [RegisteredUserController::class, 'getReferenceDuitku'])->name('register.get-reference');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     // Member routes
