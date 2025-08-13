@@ -1,6 +1,7 @@
 import { CtaButton } from '@/components/ui/cta-button';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
+import { router } from '@inertiajs/react';
 import { Check, Rocket, Star, Zap } from 'lucide-react';
 import { useState } from 'react';
 
@@ -79,6 +80,14 @@ function BenefitItem({ benefit, index }: BenefitItemProps) {
 
 export function PricingSection() {
     const [isCardHovered, setIsCardHovered] = useState(false);
+
+    const handleButton = () => {
+        router.visit(route('register'), {
+            method: 'get',
+            preserveState: true,
+            preserveScroll: true,
+        });
+    };
 
     return (
         <section className="relative overflow-hidden py-20 lg:py-32" id="pricing-section">
@@ -175,19 +184,21 @@ export function PricingSection() {
 
                                 {/* CTA Button */}
                                 <div className="space-y-4 text-center">
-                                    <CtaButton
-                                        variant="primary"
-                                        size="lg"
-                                        className={cn(
-                                            'relative w-full overflow-hidden px-16 lg:w-auto',
-                                            'shadow-primary/40 hover:shadow-primary/60 shadow-2xl',
-                                            'animate-glow-pulse',
-                                        )}
-                                    >
-                                        Dibuka Tanggal 14/08/2025
-                                        <Rocket className="ms-2 inline h-5 w-5" />
-                                        <div className="bg-primary absolute top-0 right-0 h-3 w-3 animate-ping rounded-full" />
-                                    </CtaButton>
+                                    <button onClick={handleButton}>
+                                        <CtaButton
+                                            variant="primary"
+                                            size="lg"
+                                            className={cn(
+                                                'relative w-full overflow-hidden px-16 lg:w-auto',
+                                                'shadow-primary/40 hover:shadow-primary/60 shadow-2xl',
+                                                'animate-glow-pulse cursor-pointer',
+                                            )}
+                                        >
+                                            Gabung Sekarang
+                                            <Rocket className="ms-2 inline h-5 w-5" />
+                                            <div className="bg-primary absolute top-0 right-0 h-3 w-3 animate-ping rounded-full" />
+                                        </CtaButton>
+                                    </button>
 
                                     <div className="text-muted-foreground flex items-center justify-center gap-6 text-sm">
                                         {/* <div className="flex items-center gap-2">

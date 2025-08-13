@@ -43,7 +43,8 @@ export default function Register() {
         // script.async = true;
 
         // Duitku
-        script.src = 'https://app-sandbox.duitku.com/lib/js/duitku.js';
+        // get from .env
+        script.src = import.meta.env.VITE_DUITKU_SCRIPT_URL;
 
         document.body.appendChild(script);
     }, []);

@@ -71,12 +71,12 @@ export default function Welcome() {
                                         >
                                             Log in
                                         </Link>
-                                        {/* <Link
+                                        <Link
                                             href={route('register')}
                                             className="border-border/50 text-foreground hover:border-primary/30 hover:bg-card/50 inline-block rounded-lg border px-4 py-2 text-sm leading-normal transition-all duration-300"
                                         >
                                             Register
-                                        </Link> */}
+                                        </Link>
                                     </>
                                 )}
                             </div>
