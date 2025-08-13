@@ -133,7 +133,7 @@ export default function Welcome() {
                                 </h1>
                                 {/* harusnya text-muted-foreground */}
                                 <p className="mx-auto max-w-2xl text-base leading-relaxed text-green-400 md:text-xl">
-                                    Harga Early Access Berlaku Tanggal 9 Agustus 2025 - 16 Agustus 2025 Khusus Untuk 50 Orang Pertama
+                                    Harga Early Access Berlaku Tanggal 14 Agustus 2025 - 21 Agustus 2025 Khusus Untuk 50 Orang Pertama
                                 </p>
                             </div>
 

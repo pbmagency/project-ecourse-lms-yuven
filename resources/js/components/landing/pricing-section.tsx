@@ -102,7 +102,7 @@ export function PricingSection() {
                         <div className="animate-fade-in space-y-4" style={{ animationDelay: '200ms', animationFillMode: 'both' }}>
                             <h2 className="text-foreground text-4xl font-bold md:text-5xl lg:text-6xl">
                                 <span className="block bg-clip-text text-white/80">Harga Early Access 50 Orang Pertama </span>
-                                <span className="bg-clip-text text-green-500">Berakhir Tanggal 16 Agustus 2025</span>
+                                <span className="bg-clip-text text-green-500">Berakhir Tanggal 21 Agustus 2025</span>
                             </h2>
                             {/* <p className="text-muted-foreground mx-auto max-w-2xl text-xl leading-relaxed">
                                 Harga Early Access Khusus 50 Orang Pertama Berakhir Tanggal 16 Agustus 2025{' '}
@@ -184,7 +184,7 @@ export function PricingSection() {
                                             'animate-glow-pulse',
                                         )}
                                     >
-                                        Dibuka Tanggal 9/08/2025
+                                        Dibuka Tanggal 14/08/2025
                                         <Rocket className="ms-2 inline h-5 w-5" />
                                         <div className="bg-primary absolute top-0 right-0 h-3 w-3 animate-ping rounded-full" />
                                     </CtaButton>

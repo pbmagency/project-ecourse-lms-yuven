@@ -128,7 +128,7 @@ export function FaqSection() {
                                     </span>
                                 </h2>
                                 <p className="text-muted-foreground text-xl leading-relaxed">
-                                    Temukan jawaban untuk pertanyaan yang paling sering ditanyakan tentang course Editor Amplifier.
+                                    kontak email dibawah untuk pertanyaan! : editoramplifiercontact@gmail.com.
                                 </p>
                             </div>
                         </div>
