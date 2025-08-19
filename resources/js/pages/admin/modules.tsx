@@ -32,7 +32,7 @@ interface ModulesPageProps {
 }
 
 export default function ModulesPage({ modules, courses }: ModulesPageProps) {
-    const { flash } = usePage().props;
+    const { flash } = usePage().props as any;
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingModule, setEditingModule] = useState<Module | null>(null);
@@ -49,7 +49,7 @@ export default function ModulesPage({ modules, courses }: ModulesPageProps) {
         reset,
     } = useForm({
         name: '',
-        video_path: null,
+        video_path: null as File | null,
         order: 0,
         status: 'draft' as 'draft' | 'published',
         course_id: '',
@@ -259,7 +259,7 @@ export default function ModulesPage({ modules, courses }: ModulesPageProps) {
                             <Input
                                 type="file"
                                 id="video_path"
-                                onChange={(e) => setData('video_path', e.target.files[0] ?? null)}
+                                onChange={(e) => setData('video_path', e.target.files?.[0] ?? null)}
                                 className="rounded-lg border-zinc-700/50 bg-zinc-800/50 text-white backdrop-blur-sm focus:border-cyan-400 focus:ring-cyan-400/20"
                                 placeholder="Enter video URL"
                             />

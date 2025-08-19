@@ -9,7 +9,7 @@ interface UserMenuContentProps {
     user: User;
 }
 
-const AdminBlock = ({ user, cleanup }) => {
+const AdminBlock = ({ user, cleanup }: { user: User; cleanup: () => void }) => {
     // Kalau bukan admin, render null aja
     if (user.role !== 'admin') return null;
 
