@@ -30,7 +30,7 @@ interface MaterialsPageProps {
 }
 
 export default function ModuleMaterialsPage({ materials, modules }: MaterialsPageProps) {
-    const { flash } = usePage().props;
+    const { flash } = usePage().props as any;
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingMaterial, setEditingMaterial] = useState<Material | null>(null);

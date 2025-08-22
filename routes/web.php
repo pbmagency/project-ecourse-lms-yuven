@@ -52,11 +52,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('modules', ModuleController::class);
         Route::resource('module-materials', ModuleMaterialController::class);
         Route::resource('users', UserController::class);
+        Route::resource('vouchers', \App\Http\Controllers\VoucherController::class);
     });
 });
 
 // Analytics tracking API
 Route::post('/api/analytics/track', [AnalyticsController::class, 'track'])->name('analytics.track');
+
+// Voucher validation API
+Route::post('/api/vouchers/validate', [\App\Http\Controllers\VoucherController::class, 'validate'])->name('vouchers.validate');
 
 require __DIR__ . '/settings.php';
 require __DIR__ . '/auth.php';

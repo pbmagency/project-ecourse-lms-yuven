@@ -4,6 +4,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { VoucherInput } from '@/components/voucher-input';
 import { useAnalytics } from '@/hooks/use-analytics';
 import AuthLayout from '@/layouts/auth-layout';
 import { Head, useForm } from '@inertiajs/react';
@@ -23,6 +24,8 @@ type RegisterForm = {
 export default function Register() {
     const [showToast, setShowToast] = useState(false);
     const [toastMessage, setToastMessage] = useState('');
+    const [appliedVoucher, setAppliedVoucher] = useState<any>(null);
+    const [finalPrice, setFinalPrice] = useState(499000);
     const { trackEngagement, trackConversion, trackPayment } = useAnalytics();
 
     const { data, setData, post, processing, errors, reset, setError } = useForm<Required<RegisterForm>>({
@@ -43,12 +46,23 @@ export default function Register() {
         // script.async = true;
 
         // Duitku
-        script.src = 'https://app-sandbox.duitku.com/lib/js/duitku.js';
+        // get from .env
+        script.src = import.meta.env.VITE_DUITKU_SCRIPT_URL;
 
         document.body.appendChild(script);
     }, []);
 
-    const handleSubmit = async (e) => {
+    const handleVoucherApplied = (voucherData: any) => {
+        setAppliedVoucher(voucherData);
+        setFinalPrice(voucherData.final_price);
+    };
+
+    const handleVoucherRemoved = () => {
+        setAppliedVoucher(null);
+        setFinalPrice(499000);
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         // Track form submission attempt
@@ -57,10 +71,18 @@ export default function Register() {
         try {
             // Duitku
             // 1. Minta Snap Token + validasi form
-            const res = await axios.post(route('register.get-reference'), data);
+            const registrationData = {
+                ...data,
+                final_price: finalPrice,
+                voucher_code: appliedVoucher?.voucher?.code || null,
+                discount_amount: appliedVoucher?.discount || 0,
+            };
+
+            const res = await axios.post(route('register.get-reference'), registrationData);
             const reference = res.data.reference;
 
             if (reference) {
+                // @ts-ignore
                 checkout.process(reference, {
                     defaultLanguage: 'id', //opsional pengaturan bahasa
                     currency: 'IDR', //optional to set rate estimation
@@ -72,7 +94,10 @@ export default function Register() {
                         // Track successful payment
                         trackPayment('success', {
                             payment_method: 'duitku',
-                            amount: 294000,
+                            amount: finalPrice,
+                            original_amount: 499000,
+                            discount_amount: appliedVoucher?.discount || 0,
+                            voucher_code: appliedVoucher?.voucher?.code || null,
                         });
 
                         // 2. Kalau bayar berhasil, buat akun
@@ -118,7 +143,7 @@ export default function Register() {
             //             // Track successful payment
             //             trackPayment('success', {
             //                 payment_method: 'midtrans',
-            //                 amount: 294000,
+            //                 amount: 499000,
             //             });
 
             //             // 2. Kalau bayar berhasil, buat akun
@@ -151,9 +176,11 @@ export default function Register() {
             if (err.response && err.response.data && err.response.data.errors) {
                 const validationErrors = err.response.data.errors;
 
-                // Ini triknya! Loop error & set ke useForm
+                // Loop error & set ke useForm
                 Object.keys(validationErrors).forEach((field) => {
-                    setError(field, validationErrors[field][0]); // Hanya ambil error pertama
+                    if (field in data) {
+                        setError(field as keyof RegisterForm, validationErrors[field][0]); // Hanya ambil error pertama
+                    }
                 });
             } else {
                 console.error(err);
@@ -295,8 +322,33 @@ export default function Register() {
                             <InputError message={errors.password_confirmation} />
                         </div>
                     </div>
+
+                    {/* Voucher Section */}
                     <div className="grid gap-4">
-                        <Input type="text" tabIndex={5} value="Special Price Rp 294.000" disabled className="border-primary/80" />
+                        <VoucherInput
+                            onVoucherApplied={handleVoucherApplied}
+                            onVoucherRemoved={handleVoucherRemoved}
+                            originalPrice={499000}
+                            disabled={processing}
+                        />
+                    </div>
+
+                    {/* Final Price Display */}
+                    <div className="grid gap-4">
+                        <div className="relative">
+                            <div className="border-primary/50 from-primary/5 to-primary/10 rounded-lg border bg-gradient-to-r p-4">
+                                <div className="flex items-center justify-between">
+                                    <span className="text-sm font-medium text-gray-300">Final Price:</span>
+                                    <div className="text-right">
+                                        {appliedVoucher && <div className="text-xs text-gray-500 line-through">Rp {(499000).toLocaleString()}</div>}
+                                        <div className="text-primary text-lg font-bold">Rp {finalPrice.toLocaleString()}</div>
+                                        {appliedVoucher && (
+                                            <div className="text-xs text-green-400">Save Rp {appliedVoucher.discount.toLocaleString()}!</div>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <Button type="submit" className="mt-2 w-full" tabIndex={6} disabled={processing}>

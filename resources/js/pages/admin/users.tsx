@@ -26,7 +26,7 @@ interface UsersPageProps {
 }
 
 export default function UsersPage({ users }: UsersPageProps) {
-    const { flash } = usePage().props;
+    const { flash } = usePage().props as any;
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingUser, setEditingUser] = useState<User | null>(null);

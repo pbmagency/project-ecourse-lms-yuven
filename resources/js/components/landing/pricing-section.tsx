@@ -1,6 +1,7 @@
 import { CtaButton } from '@/components/ui/cta-button';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
+import { router } from '@inertiajs/react';
 import { Check, Rocket, Star, Zap } from 'lucide-react';
 import { useState } from 'react';
 
@@ -80,6 +81,14 @@ function BenefitItem({ benefit, index }: BenefitItemProps) {
 export function PricingSection() {
     const [isCardHovered, setIsCardHovered] = useState(false);
 
+    const handleButton = () => {
+        router.visit(route('register'), {
+            method: 'get',
+            preserveState: true,
+            preserveScroll: true,
+        });
+    };
+
     return (
         <section className="relative overflow-hidden py-20 lg:py-32" id="pricing-section">
             {/* Background Effects */}
@@ -100,11 +109,13 @@ export function PricingSection() {
                         </div>
 
                         <div className="animate-fade-in space-y-4" style={{ animationDelay: '200ms', animationFillMode: 'both' }}>
-                            {/* <h2 className="text-foreground text-4xl font-bold md:text-5xl lg:text-6xl">
-                                <span className="block bg-clip-text text-white/80">Harga Early Access 50 Orang Pertama </span>
-                                <span className="bg-clip-text text-green-500">Berakhir Tanggal 21 Agustus 2025</span>
-                            </h2> */}
-                            <p className="text-muted-foreground mx-auto max-w-2xl text-xl leading-relaxed">Gabung Sekarang Di Editor Amplifie</p>
+                            <h2 className="text-foreground text-4xl font-bold md:text-5xl lg:text-6xl">
+                                <span className="text-foreground block bg-clip-text">Akses Selamanya </span>
+                                <span className="text-primary/80 bg-clip-text">Harga Spesial</span>
+                            </h2>
+                            <p className="text-muted-foreground mx-auto max-w-3xl text-xl leading-relaxed">
+                                Dapatkan akses lifetime ke semua materi premium dengan harga yang tidak akan pernah terulang lagi.
+                            </p>
                         </div>
                     </div>
 
@@ -173,19 +184,21 @@ export function PricingSection() {
 
                                 {/* CTA Button */}
                                 <div className="space-y-4 text-center">
-                                    <CtaButton
-                                        variant="primary"
-                                        size="lg"
-                                        className={cn(
-                                            'relative w-full overflow-hidden px-16 lg:w-auto',
-                                            'shadow-primary/40 hover:shadow-primary/60 shadow-2xl',
-                                            'animate-glow-pulse',
-                                        )}
-                                    >
-                                        Gabung Sekarang
-                                        <Rocket className="ms-2 inline h-5 w-5" />
-                                        <div className="bg-primary absolute top-0 right-0 h-3 w-3 animate-ping rounded-full" />
-                                    </CtaButton>
+                                    <button onClick={handleButton}>
+                                        <CtaButton
+                                            variant="primary"
+                                            size="lg"
+                                            className={cn(
+                                                'relative w-full overflow-hidden px-16 lg:w-auto',
+                                                'shadow-primary/40 hover:shadow-primary/60 shadow-2xl',
+                                                'animate-glow-pulse cursor-pointer',
+                                            )}
+                                        >
+                                            Gabung Sekarang
+                                            <Rocket className="ms-2 inline h-5 w-5" />
+                                            <div className="bg-primary absolute top-0 right-0 h-3 w-3 animate-ping rounded-full" />
+                                        </CtaButton>
+                                    </button>
 
                                     <div className="text-muted-foreground flex items-center justify-center gap-6 text-sm">
                                         {/* <div className="flex items-center gap-2">

@@ -11,6 +11,21 @@ export interface BreadcrumbItem {
     href?: string;
 }
 
+export interface Voucher {
+    id: number;
+    name: string;
+    code: string;
+    type: 'percentage' | 'fixed';
+    value: number;
+    max_discount_amount?: number;
+    usage_limit: number;
+    used_count: number;
+    expires_at?: string;
+    status: 'active' | 'inactive';
+    created_at: string;
+    updated_at: string;
+}
+
 export interface NavGroup {
     title: string;
     items: NavItem[];

@@ -28,7 +28,7 @@ interface CoursesPageProps {
 }
 
 export default function CoursesPage({ courses }: CoursesPageProps) {
-    const { flash } = usePage().props;
+    const { flash } = usePage().props as any;
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingCourse, setEditingCourse] = useState<Course | null>(null);
@@ -46,7 +46,7 @@ export default function CoursesPage({ courses }: CoursesPageProps) {
     } = useForm({
         name: '',
         description: '',
-        thumbnail: '' as string | null,
+        thumbnail: null as File | null,
         order: 0,
         status: 'active' as 'active' | 'inactive',
     });
@@ -238,7 +238,7 @@ export default function CoursesPage({ courses }: CoursesPageProps) {
                             <Input
                                 id="thumbnail"
                                 type="file"
-                                onChange={(e) => setData('thumbnail', e.target.files[0] ?? null)}
+                onChange={(e) => setData('thumbnail', e.target.files?.[0] ?? null)}
                                 className="rounded-lg border-zinc-700/50 bg-zinc-800/50 text-white backdrop-blur-sm focus:border-cyan-400 focus:ring-cyan-400/20"
                                 placeholder="Enter thumbnail"
                             />
