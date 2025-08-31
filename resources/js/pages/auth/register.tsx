@@ -82,7 +82,6 @@ export default function Register() {
             const reference = res.data.reference;
 
             if (reference) {
-                // @ts-ignore
                 checkout.process(reference, {
                     defaultLanguage: 'id', //opsional pengaturan bahasa
                     currency: 'IDR', //optional to set rate estimation

@@ -148,14 +148,25 @@ export default function Welcome() {
                 </section>
 
                 {/* Hero Video Section */}
-                <section className="relative py-8 lg:pt-12 lg:pb-24">
-                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <section className="relative overflow-hidden py-8 lg:pt-12 lg:pb-24">
+                    {/* Background Video */}
+                    <div className="absolute inset-0 z-0">
+                        <video className="h-full w-full object-cover" autoPlay loop muted playsInline>
+                            <source src="/background/herobg2.mp4" type="video/mp4" />
+                            Browser kamu tidak mendukung video.
+                        </video>
+                        {/* Overlay biar teks/CTA jelas */}
+                        <div className="absolute inset-0 bg-black/50" />
+                    </div>
+
+                    {/* Konten Utama */}
+                    <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div className="space-y-12">
                             <div className="animate-fade-in" style={{ animationDelay: '600ms', animationFillMode: 'both' }}>
-                                {/* <VideoPlayer /> */}
+                                {/* Video utama di atas background */}
                                 <VideoPlayer
                                     src="https://youtu.be/2lLbSAjeizA"
-                                    title={'VSL - Belajar Editing Tingkat Tinggi'}
+                                    title="VSL - Belajar Editing Tingkat Tinggi"
                                     className="aspect-video w-full lg:h-[600px]"
                                 />
                             </div>

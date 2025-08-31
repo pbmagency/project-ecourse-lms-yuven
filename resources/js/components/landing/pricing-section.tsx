@@ -2,7 +2,7 @@ import { CtaButton } from '@/components/ui/cta-button';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
 import { router } from '@inertiajs/react';
-import { Check, Rocket, Star, Zap } from 'lucide-react';
+import { Check, Rocket, Star, TicketPercent, Zap } from 'lucide-react';
 import { useState } from 'react';
 
 const benefits = [
@@ -200,15 +200,17 @@ export function PricingSection() {
                                         </CtaButton>
                                     </button>
 
-                                    <div className="text-muted-foreground flex items-center justify-center gap-6 text-sm">
+                                    <div className="flex items-center justify-center gap-6 text-sm text-white">
                                         {/* <div className="flex items-center gap-2">
                                             <Check className="text-primary h-4 w-4" />
                                             
                                         </div> */}
-                                        <div className="flex items-center gap-2">
-                                            <Check className="text-primary h-4 w-4" />
-                                            Akses Dimana & Kapan Saja
-                                        </div>
+                                        <button onClick={handleButton}>
+                                            <div className="hover:text-primary flex cursor-pointer items-center gap-2 transition-colors duration-300">
+                                                <TicketPercent className="h-4 w-4" />
+                                                Punya Kode Promo?
+                                            </div>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
