@@ -11,7 +11,7 @@ class VoucherController extends Controller
     public function index()
     {
         $vouchers = Voucher::orderBy('created_at', 'desc')->get();
-        
+
         return Inertia::render('admin/vouchers', [
             'vouchers' => $vouchers
         ]);
@@ -62,21 +62,21 @@ class VoucherController extends Controller
     public function validate(Request $request)
     {
         $request->validate(['code' => 'required|string']);
-        
+
         $voucher = Voucher::where('code', $request->code)->first();
-        
+
         if (!$voucher) {
             return response()->json(['error' => 'Voucher not found'], 404);
         }
-        
+
         if (!$voucher->isValid()) {
             return response()->json(['error' => 'Voucher is not valid or has expired'], 400);
         }
-        
-        $originalPrice = 294000; // Your course price
+
+        $originalPrice = 499000; // Your course price
         $discount = $voucher->calculateDiscount($originalPrice);
         $finalPrice = $originalPrice - $discount;
-        
+
         return response()->json([
             'voucher' => $voucher,
             'discount' => $discount,

@@ -25,7 +25,7 @@ export function RevenueChart({ data, className }: RevenueChartProps) {
             const conversions = data.conversion?.find((item) => item.date === date)?.total || 0;
             const engagements = data.engagement?.find((item) => item.date === date)?.total || 0;
             const payments = data.payment?.find((item) => item.date === date)?.total || 0;
-            const revenue = payments * 294000;
+            const revenue = payments * 499000;
 
             return {
                 date: new Date(date).toLocaleDateString('id-ID', {

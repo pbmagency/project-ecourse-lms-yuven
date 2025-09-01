@@ -80,7 +80,7 @@ class RegisteredUserController extends Controller
         $duitku = new DuitkuController();
 
         $order_id = 'REG-' . time();
-        $response = $duitku->create($order_id, env('COURSE_PRICE'), 'justinereifanwijaya@gmail.com', route('member.index'));
+        $response = $duitku->create($order_id, $request->final_price, 'guest@gmail.com', route('member.index'));
 
         $data = json_decode($response);
 

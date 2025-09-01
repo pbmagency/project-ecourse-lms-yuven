@@ -102,7 +102,7 @@ export function useAnalytics() {
                 event_type: 'payment',
                 event_data: {
                     status,
-                    amount: 294000,
+                    amount: 499000,
                     currency: 'IDR',
                     timestamp: new Date().toISOString(),
                     ...data,

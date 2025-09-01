@@ -18,7 +18,7 @@ import { useEffect, useState } from 'react';
 
 export default function Welcome() {
     const { auth } = usePage<SharedData>().props;
-    const { trackVisit, trackEngagement } = useAnalytics();
+    const { trackVisit } = useAnalytics();
     const [isHovered, setIsHovered] = useState(false);
 
     // Initialize tracking hooks
@@ -150,14 +150,13 @@ export default function Welcome() {
                 {/* Hero Video Section */}
                 <section className="relative overflow-hidden py-8 lg:pt-12 lg:pb-24">
                     {/* Background Video */}
-                    <div className="absolute inset-0 z-0">
+                    {/* <div className="absolute inset-0 z-0">
                         <video className="h-full w-full object-cover" autoPlay loop muted playsInline>
                             <source src="/background/herobg2.mp4" type="video/mp4" />
                             Browser kamu tidak mendukung video.
                         </video>
-                        {/* Overlay biar teks/CTA jelas */}
                         <div className="absolute inset-0 bg-black/50" />
-                    </div>
+                    </div> */}
 
                     {/* Konten Utama */}
                     <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
