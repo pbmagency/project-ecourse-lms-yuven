@@ -21,7 +21,7 @@ function BenefitItem({ icon, title, delay = 0 }: BenefitItemProps) {
         >
             <div
                 className={cn(
-                    'flex h-12 w-12 items-center justify-center rounded-full',
+                    'flex h-12 w-12 shrink-0 items-center justify-center rounded-full',
                     'bg-primary/10 border-primary/20 text-primary border',
                     'group-hover:bg-primary/20 group-hover:border-primary/40',
                     'transition-all duration-300 group-hover:scale-110',
@@ -29,7 +29,7 @@ function BenefitItem({ icon, title, delay = 0 }: BenefitItemProps) {
             >
                 {icon}
             </div>
-            <span className="text-foreground group-hover:text-primary font-medium transition-colors duration-300">{title}</span>
+            <span className="text-foreground group-hover:text-primary flex-1 font-medium transition-colors duration-300">{title}</span>
         </div>
     );
 }
