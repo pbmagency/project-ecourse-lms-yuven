@@ -12,6 +12,24 @@ import axios from 'axios';
 import { CheckCircle, LoaderCircle } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
+// Declare global checkout variable for Duitku
+declare global {
+    interface Window {
+        checkout: {
+            process: (reference: string, options: {
+                defaultLanguage?: string;
+                currency?: string;
+                successEvent?: (result: any) => void;
+                pendingEvent?: (result: any) => void;
+                errorEvent?: (result: any) => void;
+                closeEvent?: (result: any) => void;
+            }) => void;
+        };
+    }
+}
+
+const checkout = window.checkout;
+
 type RegisterForm = {
     username: string;
     name: string;
@@ -81,7 +99,7 @@ export default function Register() {
             const res = await axios.post(route('register.get-reference'), registrationData);
             const reference = res.data.reference;
 
-            if (reference) {
+            if (reference && checkout) {
                 checkout.process(reference, {
                     defaultLanguage: 'id', //opsional pengaturan bahasa
                     currency: 'IDR', //optional to set rate estimation
